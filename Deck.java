@@ -14,14 +14,32 @@ public class Deck {
 		deck.add(c);
 	}
 	
-	public void delCard(String name)
+	public boolean delCard(String name)
 	{
+		boolean isInDeck=false;
 		for(Card c : deck)
 		{
 			if(c.getName() == name)
 			{
 				deck.remove(c);
+				isInDeck = true;
+				break;
 			}
 		}
+		return isInDeck;
+	}
+	public boolean displayCard(String name)
+	{
+		boolean isInDeck=false;
+		for(Card c : deck)
+		{
+			if(c.getName() == name)
+			{
+				c.display();
+				isInDeck = true;
+				break;
+			}
+		}
+		return isInDeck;
 	}
 }

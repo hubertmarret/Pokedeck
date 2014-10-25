@@ -6,6 +6,8 @@ public abstract class Card {
 	protected CardType cardType;
 	protected String collection;
 	
+	protected Scanner scan;
+	
 	
 	public String getName() {
 		return name;
@@ -14,25 +16,24 @@ public abstract class Card {
 		this.name = name;
 	}
 	
-	public void create()
+	
+	public void create(CardType cardType)
 	{
-		Scanner scan = new Scanner(System.in);
+		scan = new Scanner(System.in);
 		
 		System.out.println("Enter the name of the card");
 		name = scan.nextLine();
-		System.out.println("Enter the type of the card ('pokemon','trainer','energy')");
-		String str = scan.nextLine();
-		switch(str)
-		{
-		case "pokemon": cardType = CardType.POKEMONCARD; break;
-		case "trainer": cardType = CardType.TRAINERCARD; break;
-		case "energy": cardType = CardType.ENERGYCARD; break;
-		default: System.out.println("not an option");
-		}
+		this.cardType = cardType;
 		System.out.println("Enter the collection of the card");
 		collection = scan.nextLine();
 		
 		scan.close();
 	}
 	
+	public void display()
+	{
+		System.out.println("Name : "+name);
+		System.out.println("CardType : "+cardType);
+		System.out.println("Collection : "+collection);
+	}
 }
