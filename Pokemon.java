@@ -19,7 +19,7 @@ public class Pokemon extends Card {
 		this.description = description;
 	}
 	
-	private PokemonType pokemonTypeChoice()
+	private PokemonType pokemonTypeChoice(Scanner scan)
 	{
 		int pokemonType;
 		boolean goodAnswer=false;
@@ -39,32 +39,28 @@ public class Pokemon extends Card {
 				System.out.println("wrong answer, try again");
 			}
 		}
-		while(goodAnswer);
+		while(!goodAnswer);
 				
 		return PokemonType.values()[pokemonType];
 	}
 	
-	public void create(CardType cardType)
+	public void create()
 	{
-		scan = new Scanner(System.in);
-		
 		System.out.println("Enter the health of the pokemon");
-		health = scan.nextInt();
-		scan.nextLine();
+		health = UserInterface.scan.nextInt();
+		UserInterface.scan.nextLine();
 		
-		pokemonType = pokemonTypeChoice();
+		pokemonType = pokemonTypeChoice(UserInterface.scan);
 		
 		System.out.println("Enter the description of the pokemon");
-		description = scan.nextLine();
-		
-		scan.close();
+		description = UserInterface.scan.nextLine();
 	}
 
 	public void display()
 	{
-		System.out.println("Health : "+health+"hp");
+		System.out.println("Health : "+health+" hp");
 		System.out.println("Type : "+pokemonType);
-		System.out.println("Description : "+description);
+		System.out.println("Description : "+description+"\n");
 	}
 	
 }

@@ -1,13 +1,10 @@
-import java.util.Scanner;
 
 
 public abstract class Card {
 	protected String name;
 	protected CardType cardType;
 	protected String collection;
-	
-	protected Scanner scan;
-	
+		
 	
 	public String getName() {
 		return name;
@@ -16,18 +13,26 @@ public abstract class Card {
 		this.name = name;
 	}
 	
+	public abstract void create();
 	
-	public void create(CardType cardType)
+	public void createCard(CardType cardType)
 	{
-		scan = new Scanner(System.in);
-		
 		System.out.println("Enter the name of the card");
-		name = scan.nextLine();
-		this.cardType = cardType;
-		System.out.println("Enter the collection of the card");
-		collection = scan.nextLine();
+		name = UserInterface.scan.nextLine();
 		
-		scan.close();
+		this.cardType = cardType;
+		
+		System.out.println("Enter the collection of the card");
+		collection = UserInterface.scan.nextLine();
+	}
+	
+	public void modifyCard()
+	{
+		System.out.println("Enter the name of the card");
+		name = UserInterface.scan.nextLine();
+				
+		System.out.println("Enter the collection of the card");
+		collection = UserInterface.scan.nextLine();
 	}
 	
 	public void display()

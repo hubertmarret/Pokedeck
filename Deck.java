@@ -14,32 +14,53 @@ public class Deck {
 		deck.add(c);
 	}
 	
+	public int findCard(String name)
+	{
+		int index = -1;
+		int cpt = 0;
+		for(Card c : deck)
+		{
+			if(c.getName().contains(name))
+			{
+				index = cpt;
+				break;
+			}
+			cpt++;
+		}
+		return index;
+	}
+	
+	public boolean modifyCard(String name)
+	{
+		int index = findCard(name);
+		if(index >= 0)
+		{
+			deck.get(index).modifyCard();
+			deck.get(index).create();
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean delCard(String name)
 	{
-		boolean isInDeck=false;
-		for(Card c : deck)
+		int index = findCard(name);
+		if(index >= 0)
 		{
-			if(c.getName() == name)
-			{
-				deck.remove(c);
-				isInDeck = true;
-				break;
-			}
+			deck.remove(deck.get(index));
+			return true;
 		}
-		return isInDeck;
+		return false;
 	}
+	
 	public boolean displayCard(String name)
 	{
-		boolean isInDeck=false;
-		for(Card c : deck)
+		int index = findCard(name);
+		if(index >= 0)
 		{
-			if(c.getName() == name)
-			{
-				c.display();
-				isInDeck = true;
-				break;
-			}
+			deck.get(index).display();
+			return true;
 		}
-		return isInDeck;
+		return false;
 	}
 }

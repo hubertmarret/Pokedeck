@@ -1,4 +1,4 @@
 
 public enum UserChoice {
-	Quit, AddCard, DelCard, DisplayCard
+	Quit, AddCard, ModifyCard, DelCard, DisplayCard, DisplayPokedeck, FindCardsByType, FindCardsByCollection
 }
