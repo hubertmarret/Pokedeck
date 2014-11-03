@@ -1,11 +1,27 @@
 package pcg;
 
+import java.io.Serializable;
 
-public abstract class Card {
+
+public class Card implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	protected String name;
 	protected CardType cardType;
 	protected String collection;
-		
+	
+	public Card()
+	{
+		name = "noName";
+		cardType = CardType.POKEMONCARD;
+		collection = "unknown";
+	}
+	public Card(String name, CardType cardType, String collection)
+	{
+		this.name = name;
+		this.cardType = cardType;
+		this.collection = collection;
+	}
 	
 	public String getName() {
 		return name;
@@ -26,7 +42,10 @@ public abstract class Card {
 		this.collection = collection;
 	}
 	
-	public abstract void create();
+	public void create()
+	{
+		
+	}
 	
 	public void createCard(CardType cardType)
 	{

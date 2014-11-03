@@ -1,4 +1,9 @@
 package pcg;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 
@@ -11,7 +16,36 @@ public class UserInterface {
 	public UserInterface()
 	{
 		scan = new Scanner(System.in);
-		deck = new Deck();
+		createDeck();
+	}
+	
+	public void createDeck()
+	{
+		deck = null;
+		try {
+			FileInputStream fis = new FileInputStream("deck.serial");
+			ObjectInputStream ois= new ObjectInputStream(fis);
+			try {	
+				deck = (Deck) ois.readObject(); 
+			} finally {
+				try {
+					ois.close();
+				} finally {
+					fis.close();
+				}
+			}
+		} catch(IOException ioe) {
+			ioe.printStackTrace();
+		} catch(ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		}
+		if(deck != null) {
+			System.out.println("The deck has been deserialised");
+		}
+		else
+		{
+			System.out.println("problem to deserialise the deck");
+		}
 	}
 	
 	public void addCard()
@@ -167,6 +201,28 @@ public class UserInterface {
 		return UserChoice.values()[userChoice];
 	}
 	
+	public void saveDeck()
+	{
+		try {
+			FileOutputStream fos = new FileOutputStream("deck.serial");
+
+			ObjectOutputStream oos= new ObjectOutputStream(fos);
+			try {
+				oos.writeObject(deck); 
+				oos.flush();
+				System.out.println("The deck has been serialized");
+			} finally {
+				try {
+					oos.close();
+				} finally {
+					fos.close();
+				}
+			}
+		} catch(IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+	
 	public void infinteLoop()
 	{
 		boolean quit = false;
@@ -183,7 +239,7 @@ public class UserInterface {
 				case DISPLAYPOKEDECK: displayPokedeck(); break;
 				case FINDCARDSBYTYPE: findCardsByType(); break;
 				case FINDCARDSBYCOLLECTION: findCardsByCollection(); break;
-				case QUIT: quit = true; scan.close(); break;
+				case QUIT: quit = true; saveDeck(); scan.close(); break;
 				default: System.out.println("There is a problem");
 			}
 		}

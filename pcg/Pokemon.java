@@ -3,17 +3,21 @@ import java.util.Scanner;
 
 
 public class Pokemon extends Card {
+	private static final long serialVersionUID = 2L;
+	
 	private int health;
 	private PokemonType pokemonType;
 	private String description;
 	
 	public Pokemon()
 	{
+		super();
 		health = 0;
 		pokemonType = PokemonType.NORMAL;
 		description = "default";
 	}
 	public Pokemon(int health, PokemonType pokemonType, String description) {
+		super();
 		this.health = health;
 		this.pokemonType = pokemonType;
 		this.description = description;
