@@ -92,7 +92,24 @@ public class UserInterface {
 		while(!goodAnswer);
 	}
 	
+	public void displayPokedeck()
+	{
+		deck.displayDeck();
+	}
+	
+	public void findCardsByType()
+	{
+		CardType cardType = cardTypeChoice();
+		deck.displayByType(cardType);
+	}
 
+	public void findCardsByCollection()
+	{
+		System.out.println("Enter the collection");
+		String collection = scan.nextLine();
+		deck.displayByCollection(collection);
+	}
+	
 	private CardType cardTypeChoice()
 	{		
 		int cardType;
@@ -125,11 +142,14 @@ public class UserInterface {
 		boolean goodAnswer=false;
 		do
 		{
-			System.out.println("what do you want to do ?");
+			System.out.println("\nWhat do you want to do ?");
 			System.out.println("_ add a card (type '1')");
 			System.out.println("_ modify a card (type '2')");
 			System.out.println("_ delete a card (type '3')");
 			System.out.println("_ display a card (type '4')");
+			System.out.println("_ display the pokedeck (type '5')");
+			System.out.println("_ display the cards of a chosen type (type '6')");
+			System.out.println("_ display the cards of a chosen collection (type '7')");
 			System.out.println("_ quit this program (type '0')");
 			userChoice = scan.nextInt();
 			scan.nextLine();
@@ -160,6 +180,9 @@ public class UserInterface {
 				case MODIFYCARD: modifyCard(); break;
 				case DELCARD: delCard(); break;
 				case DISPLAYCARD: displayCard(); break;
+				case DISPLAYPOKEDECK: displayPokedeck(); break;
+				case FINDCARDSBYTYPE: findCardsByType(); break;
+				case FINDCARDSBYCOLLECTION: findCardsByCollection(); break;
 				case QUIT: quit = true; scan.close(); break;
 				default: System.out.println("There is a problem");
 			}

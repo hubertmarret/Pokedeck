@@ -58,6 +58,7 @@ public class Pokemon extends Card {
 
 	public void display()
 	{
+		super.display();
 		System.out.println("Health : "+health+" hp");
 		System.out.println("Type : "+pokemonType);
 		System.out.println("Description : "+description+"\n");

@@ -21,7 +21,7 @@ public class Deck {
 		int cpt = 0;
 		for(Card c : deck)
 		{
-			if(c.getName().contains(name))
+			if(c.getName().equals(name))
 			{
 				index = cpt;
 				break;
@@ -29,6 +29,32 @@ public class Deck {
 			cpt++;
 		}
 		return index;
+	}
+	
+	public ArrayList<Card> findCardsByType(CardType cardType)
+	{
+		ArrayList<Card> cards = new ArrayList<>();
+		for(Card c : deck)
+		{
+			if(c.getType() == cardType)
+			{
+				cards.add(c);
+			}
+		}
+		return cards;
+	}
+	
+	public ArrayList<Card> findCardsByCollection(String collection)
+	{
+		ArrayList<Card> cards = new ArrayList<>();
+		for(Card c : deck)
+		{
+			if(c.getCollection().equals(collection))
+			{
+				cards.add(c);
+			}
+		}
+		return cards;
 	}
 	
 	public boolean modifyCard(String name)
@@ -63,5 +89,29 @@ public class Deck {
 			return true;
 		}
 		return false;
+	}
+	
+	public void displayDeck()
+	{
+		for(Card c : deck)
+		{
+			c.display();
+		}
+	}
+	
+	public void displayByType(CardType cardType)
+	{
+		for(Card c : findCardsByType(cardType))
+		{
+			c.display();
+		}
+	}
+	
+	public void displayByCollection(String collection)
+	{
+		for(Card c : findCardsByCollection(collection))
+		{
+			c.display();
+		}
 	}
 }

@@ -13,6 +13,18 @@ public abstract class Card {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public CardType getType() {
+		return cardType;
+	}
+	public void setType(CardType cardType) {
+		this.cardType = cardType;
+	}
+	public String getCollection() {
+		return collection;
+	}
+	public void setCollection(String collection) {
+		this.collection = collection;
+	}
 	
 	public abstract void create();
 	
