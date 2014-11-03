@@ -1,3 +1,4 @@
+package pcg;
 import java.util.Scanner;
 
 
@@ -6,7 +7,6 @@ public class Pokemon extends Card {
 	private PokemonType pokemonType;
 	private String description;
 	
-	/* CONSTRUCTORS */
 	public Pokemon()
 	{
 		health = 0;

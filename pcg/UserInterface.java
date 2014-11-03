@@ -1,3 +1,4 @@
+package pcg;
 import java.util.Scanner;
 
 
@@ -19,10 +20,10 @@ public class UserInterface {
 		CardType cardType = cardTypeChoice();
 		switch(cardType)
 		{
-		case POKEMONCARD: c = new Pokemon(); break;
-		case TRAINERCARD: c = new Pokemon(); break;
-		case ENERGYCARD: c = new Pokemon(); break;
-		default: c = new Pokemon(); System.out.println("There is a problem");
+			case POKEMONCARD: c = new Pokemon(); break;
+			case TRAINERCARD: c = new Pokemon(); break;
+			case ENERGYCARD: c = new Pokemon(); break;
+			default: c = new Pokemon(); System.out.println("There is a problem");
 		}
 		c.createCard(cardType);
 		c.create();
@@ -155,12 +156,12 @@ public class UserInterface {
 			UserChoice userChoice = userChoiceMenu();
 			switch(userChoice)
 			{
-			case AddCard: addCard(); break;
-			case ModifyCard: modifyCard(); break;
-			case DelCard: delCard(); break;
-			case DisplayCard: displayCard(); break;
-			case Quit: quit = true; scan.close(); break;
-			default: System.out.println("There is a problem");
+				case ADDCARD: addCard(); break;
+				case MODIFYCARD: modifyCard(); break;
+				case DELCARD: delCard(); break;
+				case DISPLAYCARD: displayCard(); break;
+				case QUIT: quit = true; scan.close(); break;
+				default: System.out.println("There is a problem");
 			}
 		}
 		while(!quit);
