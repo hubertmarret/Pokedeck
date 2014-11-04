@@ -1,10 +1,17 @@
-package pcg;
+package ui;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
+
+import cardHandler.Card;
+import cardHandler.CardType;
+import cardHandler.Deck;
+import cardHandler.Pokemon;
+import cardHandler.PokemonType;
 
 
 public class UserInterface {
@@ -142,6 +149,31 @@ public class UserInterface {
 		System.out.println("Enter the collection");
 		String collection = scan.nextLine();
 		deck.displayByCollection(collection);
+	}
+	
+	public PokemonType pokemonTypeChoice(Scanner scan)
+	{
+		int pokemonType;
+		boolean goodAnswer=false;
+		do
+		{
+			System.out.println("Enter the type of the pokemon\n");
+			System.out.println("normal('0'), fire('1'), water('2'), grass('3'), lightning('4'), psychic('5')");
+			System.out.println("fighting('6'), darkness('7'), metal('8'), fairy('9'), dragon('10')");
+			pokemonType = scan.nextInt();
+			scan.nextLine();
+			if(pokemonType >= 0 && pokemonType < PokemonType.values().length)
+			{
+				goodAnswer = true;
+			}
+			else
+			{
+				System.out.println("wrong answer, try again");
+			}
+		}
+		while(!goodAnswer);
+				
+		return PokemonType.values()[pokemonType];
 	}
 	
 	private CardType cardTypeChoice()

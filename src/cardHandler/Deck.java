@@ -1,4 +1,4 @@
-package pcg;
+package cardHandler;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class Deck implements Serializable {
 		int cpt = 0;
 		for(Card c : deck)
 		{
-			if(c.getName().equals(name))
+			if(c.name.equals(name))
 			{
 				index = cpt;
 				break;
@@ -39,7 +39,7 @@ public class Deck implements Serializable {
 		ArrayList<Card> cards = new ArrayList<>();
 		for(Card c : deck)
 		{
-			if(c.getType() == cardType)
+			if(c.cardType == cardType)
 			{
 				cards.add(c);
 			}
@@ -52,7 +52,7 @@ public class Deck implements Serializable {
 		ArrayList<Card> cards = new ArrayList<>();
 		for(Card c : deck)
 		{
-			if(c.getCollection().equals(collection))
+			if(c.collection.equals(collection))
 			{
 				cards.add(c);
 			}
@@ -60,13 +60,12 @@ public class Deck implements Serializable {
 		return cards;
 	}
 	
-	public boolean modifyCard(String name)
+	public boolean modifyCard()
 	{
 		int index = findCard(name);
 		if(index >= 0)
 		{
-			deck.get(index).modifyCard();
-			deck.get(index).create();
+			deck.get(index).setCard();
 			return true;
 		}
 		return false;
