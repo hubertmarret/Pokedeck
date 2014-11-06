@@ -1,10 +1,12 @@
 package ui;
 
+import cardHandler.Game;
+
 public class Main {
 
 	public static void main(String[] args) {
-		UserInterface ui = new UserInterface();
-		ui.infinteLoop();
+		Game game = new Game();
+		game.infinteLoop();
 	}
 
 }

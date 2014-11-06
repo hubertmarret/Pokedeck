@@ -1,5 +1,8 @@
 package cardHandler;
 
+import descriptor.CardDescriptor;
+import descriptor.PokemonDescriptor;
+
 public class Pokemon extends Card {
 	private static final long serialVersionUID = 2L;
 	
@@ -21,6 +24,13 @@ public class Pokemon extends Card {
 		this.pokemonType = pokemonType;
 		this.description = description;
 	}
+	public Pokemon(CardDescriptor cardDesc, PokemonDescriptor pokeDesc)
+	{
+		super(cardDesc);
+		health = pokeDesc.health;
+		pokemonType = pokeDesc.pokemonType;
+		description = pokeDesc.description;
+	}
 	
 	public void setCard(String name, CardType cardType, String collection, int health, PokemonType pokemonType, String description)
 	{
@@ -28,6 +38,13 @@ public class Pokemon extends Card {
 		this.health = health;
 		this.pokemonType = pokemonType;
 		this.description = description;
+	}
+	public void setCard(CardDescriptor cardDesc, PokemonDescriptor pokeDesc)
+	{
+		super.setCard(cardDesc);
+		health = pokeDesc.health;
+		pokemonType = pokeDesc.pokemonType;
+		description = pokeDesc.description;
 	}
 
 	public void display()
@@ -40,6 +57,6 @@ public class Pokemon extends Card {
 	
 	public String toString()
 	{
-		return "Health : "+health+" hp\nType : "+pokemonType+"\nDescription : "+description+"\n";
+		return super.toString()+"Health : "+health+" hp\nType : "+pokemonType+"\nDescription : "+description+"\n";
 	}
 }

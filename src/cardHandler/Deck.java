@@ -1,7 +1,7 @@
 package cardHandler;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-
 
 public class Deck implements Serializable {
 	private static final long serialVersionUID = 99L;
@@ -11,11 +11,6 @@ public class Deck implements Serializable {
 	public Deck()
 	{
 		deck = new ArrayList<Card>();
-	}
-	
-	public void addCard(Card c)
-	{
-		deck.add(c);
 	}
 	
 	public int findCard(String name)
@@ -34,7 +29,12 @@ public class Deck implements Serializable {
 		return index;
 	}
 	
-	public ArrayList<Card> findCardsByType(CardType cardType)
+	public Card getCard(int index)
+	{
+		return deck.get(index);
+	}
+	
+	private ArrayList<Card> findCardsByType(CardType cardType)
 	{
 		ArrayList<Card> cards = new ArrayList<>();
 		for(Card c : deck)
@@ -47,7 +47,7 @@ public class Deck implements Serializable {
 		return cards;
 	}
 	
-	public ArrayList<Card> findCardsByCollection(String collection)
+	private ArrayList<Card> findCardsByCollection(String collection)
 	{
 		ArrayList<Card> cards = new ArrayList<>();
 		for(Card c : deck)
@@ -60,60 +60,48 @@ public class Deck implements Serializable {
 		return cards;
 	}
 	
-	public boolean modifyCard()
+	public void addCard(Card c)
 	{
-		int index = findCard(name);
-		if(index >= 0)
-		{
-			deck.get(index).setCard();
-			return true;
-		}
-		return false;
+		deck.add(c);
 	}
 	
-	public boolean delCard(String name)
+	public void delCard(int index)
 	{
-		int index = findCard(name);
-		if(index >= 0)
-		{
-			deck.remove(deck.get(index));
-			return true;
-		}
-		return false;
+		deck.remove(deck.get(index));
 	}
 	
-	public boolean displayCard(String name)
+	public String displayCard(int index)
 	{
-		int index = findCard(name);
-		if(index >= 0)
-		{
-			deck.get(index).display();
-			return true;
-		}
-		return false;
+		return deck.get(index).toString();
 	}
 	
-	public void displayDeck()
+	public String displayDeck()
 	{
+		String str = "";
 		for(Card c : deck)
 		{
-			c.display();
+			str += c.toString()+"\n";
 		}
+		return str;
 	}
 	
-	public void displayByType(CardType cardType)
+	public String displayByType(CardType cardType)
 	{
+		String str = "";
 		for(Card c : findCardsByType(cardType))
 		{
-			c.display();
+			str += c.toString()+"\n";
 		}
+		return str;
 	}
 	
-	public void displayByCollection(String collection)
+	public String displayByCollection(String collection)
 	{
+		String str = "";
 		for(Card c : findCardsByCollection(collection))
 		{
-			c.display();
+			str += c.toString()+"\n";
 		}
+		return str;
 	}
 }

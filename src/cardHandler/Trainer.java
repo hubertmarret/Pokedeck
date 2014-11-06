@@ -1,5 +1,8 @@
 package cardHandler;
 
+import descriptor.CardDescriptor;
+import descriptor.TrainerDescriptor;
+
 public class Trainer extends Card {
 	private static final long serialVersionUID = 3L;
 	
@@ -19,12 +22,24 @@ public class Trainer extends Card {
 		this.role = role;
 		this.description = description;
 	}
+	public Trainer(CardDescriptor cardDesc, TrainerDescriptor trDesc)
+	{
+		super(cardDesc);
+		role = trDesc.role;
+		description = trDesc.description;
+	}
 	
 	public void setCard(String name, CardType cardType, String collection, String role, String description)
 	{
 		super.setCard(name, cardType, collection);
 		this.role = role;
 		this.description = description;
+	}
+	public void setCard(CardDescriptor cardDesc, TrainerDescriptor trDesc)
+	{
+		super.setCard(cardDesc);
+		role = trDesc.role;
+		description = trDesc.description;
 	}
 	
 	public void display()
@@ -36,6 +51,6 @@ public class Trainer extends Card {
 	
 	public String toString()
 	{
-		return "Role : "+role+"\nDescription : "+description+"\n";
+		return super.toString()+"Role : "+role+"\nDescription : "+description+"\n";
 	}
 }

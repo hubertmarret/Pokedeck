@@ -1,182 +1,64 @@
 package ui;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
-import cardHandler.Card;
 import cardHandler.CardType;
-import cardHandler.Deck;
-import cardHandler.Pokemon;
 import cardHandler.PokemonType;
 
 
 public class UserInterface {
 	
 	public static Scanner scan;
-	private Deck deck;
-	
 	
 	public UserInterface()
 	{
 		scan = new Scanner(System.in);
-		createDeck();
 	}
 	
-	public void createDeck()
+	
+	public void hello()
 	{
-		deck = null;
-		try {
-			FileInputStream fis = new FileInputStream("deck.serial");
-			ObjectInputStream ois= new ObjectInputStream(fis);
-			try {	
-				deck = (Deck) ois.readObject(); 
-			} finally {
-				try {
-					ois.close();
-				} finally {
-					fis.close();
-				}
-			}
-		} catch(IOException ioe) {
-			ioe.printStackTrace();
-		} catch(ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
-		}
-		if(deck != null) {
-			System.out.println("The deck has been deserialised");
-		}
-		else
-		{
-			System.out.println("problem to deserialise the deck");
-		}
+		System.out.println("Welcome on our Pokemon card handler !!\n\n");
 	}
 	
-	public void addCard()
+	public void wrongAnswer()
 	{
-		Card c;
-		CardType cardType = cardTypeChoice();
-		switch(cardType)
-		{
-			case POKEMONCARD: c = new Pokemon(); break;
-			case TRAINERCARD: c = new Pokemon(); break;
-			case ENERGYCARD: c = new Pokemon(); break;
-			default: c = new Pokemon(); System.out.println("There is a problem");
-		}
-		c.createCard(cardType);
-		c.create();
-		deck.addCard(c);
-	}
-	
-	public void modifyCard()
-	{
-		String name;
-		boolean goodAnswer=false;
-		do
-		{
-			System.out.println("Enter the name of the card you want to modify");
-			name = scan.nextLine();
-			if(deck.modifyCard(name))
-			{
-				goodAnswer = true;
-				System.out.println("The card "+name+" has been modified");
-			}
-			else
-			{
-				System.out.println("No card have this name, try another one");
-			}
-		}
-		while(!goodAnswer);
+		System.out.println("wrong answer, try again !");
 	}
 	
 	public void delCard()
 	{
-		String name;
-		boolean goodAnswer=false;
-		do
-		{
-			System.out.println("Enter the name of the card you want to delete");
-			name = scan.nextLine();
-			if(deck.delCard(name))
-			{
-				goodAnswer = true;
-				System.out.println("The card "+name+" has been deleted");
-			}
-			else
-			{
-				System.out.println("No card have this name, try another one");
-			}
-		}
-		while(!goodAnswer);
+		System.out.println("The card has been deleted");
 	}
 	
-	public void displayCard()
+	public void displayCard(String cardInfo)
 	{
-		String name;
-		boolean goodAnswer=false;
-		do
-		{
-			System.out.println("Enter the name of the card you want to display");
-			name = scan.nextLine();
-			if(deck.displayCard(name))
-			{
-				goodAnswer = true;
-			}
-			else
-			{
-				System.out.println("No card have this name, try another one");
-			}
-		}
-		while(!goodAnswer);
+		System.out.println(cardInfo);
 	}
 	
-	public void displayPokedeck()
+	public void quit()
 	{
-		deck.displayDeck();
+		scan.close();
+		System.out.println("Thank you for playing !!");
 	}
 	
-	public void findCardsByType()
+	
+	public String scanString(String s)
 	{
-		CardType cardType = cardTypeChoice();
-		deck.displayByType(cardType);
-	}
-
-	public void findCardsByCollection()
-	{
-		System.out.println("Enter the collection");
-		String collection = scan.nextLine();
-		deck.displayByCollection(collection);
+		System.out.println("Enter the "+s+" of the card");
+		String str = scan.nextLine();
+		return str;
 	}
 	
-	public PokemonType pokemonTypeChoice(Scanner scan)
+	public int scanInt(String s)
 	{
-		int pokemonType;
-		boolean goodAnswer=false;
-		do
-		{
-			System.out.println("Enter the type of the pokemon\n");
-			System.out.println("normal('0'), fire('1'), water('2'), grass('3'), lightning('4'), psychic('5')");
-			System.out.println("fighting('6'), darkness('7'), metal('8'), fairy('9'), dragon('10')");
-			pokemonType = scan.nextInt();
-			scan.nextLine();
-			if(pokemonType >= 0 && pokemonType < PokemonType.values().length)
-			{
-				goodAnswer = true;
-			}
-			else
-			{
-				System.out.println("wrong answer, try again");
-			}
-		}
-		while(!goodAnswer);
-				
-		return PokemonType.values()[pokemonType];
+		System.out.println("Enter the "+s+" of the card");
+		int i = scan.nextInt();
+		scan.nextLine();
+		return i;
 	}
 	
-	private CardType cardTypeChoice()
+	public CardType cardTypeChoice()
 	{		
 		int cardType;
 		boolean goodAnswer=false;
@@ -202,7 +84,32 @@ public class UserInterface {
 		return CardType.values()[cardType];
 	}
 	
-	private UserChoice userChoiceMenu()
+	public PokemonType pokemonTypeChoice()
+	{
+		int pokemonType;
+		boolean goodAnswer=false;
+		do
+		{
+			System.out.println("Enter the type of the pokemon\n");
+			System.out.println("normal('0'), fire('1'), water('2'), grass('3'), lightning('4'), psychic('5')");
+			System.out.println("fighting('6'), darkness('7'), metal('8'), fairy('9'), dragon('10')");
+			pokemonType = scan.nextInt();
+			scan.nextLine();
+			if(pokemonType >= 0 && pokemonType < PokemonType.values().length)
+			{
+				goodAnswer = true;
+			}
+			else
+			{
+				System.out.println("wrong answer, try again");
+			}
+		}
+		while(!goodAnswer);
+				
+		return PokemonType.values()[pokemonType];
+	}
+	
+	public UserChoice userChoiceMenu()
 	{
 		int userChoice;
 		boolean goodAnswer=false;
@@ -233,49 +140,26 @@ public class UserInterface {
 		return UserChoice.values()[userChoice];
 	}
 	
-	public void saveDeck()
+	/*public void modifyCard()
 	{
-		try {
-			FileOutputStream fos = new FileOutputStream("deck.serial");
-
-			ObjectOutputStream oos= new ObjectOutputStream(fos);
-			try {
-				oos.writeObject(deck); 
-				oos.flush();
-				System.out.println("The deck has been serialized");
-			} finally {
-				try {
-					oos.close();
-				} finally {
-					fos.close();
-				}
-			}
-		} catch(IOException ioe) {
-			ioe.printStackTrace();
-		}
-	}
-	
-	public void infinteLoop()
-	{
-		boolean quit = false;
-		System.out.println("Welcome on our Pokemon card handler !!\n\n");
+		String name;
+		boolean goodAnswer=false;
 		do
-		{	
-			UserChoice userChoice = userChoiceMenu();
-			switch(userChoice)
+		{
+			System.out.println("Enter the name of the card you want to modify");
+			name = scan.nextLine();
+			if(deck.modifyCard(name))
 			{
-				case ADDCARD: addCard(); break;
-				case MODIFYCARD: modifyCard(); break;
-				case DELCARD: delCard(); break;
-				case DISPLAYCARD: displayCard(); break;
-				case DISPLAYPOKEDECK: displayPokedeck(); break;
-				case FINDCARDSBYTYPE: findCardsByType(); break;
-				case FINDCARDSBYCOLLECTION: findCardsByCollection(); break;
-				case QUIT: quit = true; saveDeck(); scan.close(); break;
-				default: System.out.println("There is a problem");
+				goodAnswer = true;
+				System.out.println("The card "+name+" has been modified");
+			}
+			else
+			{
+				System.out.println("No card have this name, try another one");
 			}
 		}
-		while(!quit);
-		System.out.println("Thank you for playing !!");
-	}
+		while(!goodAnswer);
+	}*/
+	
+	
 }

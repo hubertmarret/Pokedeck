@@ -2,6 +2,10 @@ package cardHandler;
 
 import java.io.Serializable;
 
+import descriptor.CardDescriptor;
+import descriptor.PokemonDescriptor;
+import descriptor.TrainerDescriptor;
+
 
 public class Card implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,12 +26,37 @@ public class Card implements Serializable {
 		this.cardType = cardType;
 		this.collection = collection;
 	}
+	public Card(CardDescriptor cardDesc)
+	{
+		name = cardDesc.name;
+		cardType = cardDesc.cardType;
+		collection = cardDesc.collection;
+	}
 	
 	public void setCard(String name, CardType cardType, String collection)
 	{
 		this.name = name;
-		this.cardType = cardType;
 		this.collection = collection;
+	}
+	public void setCard(CardDescriptor cardDesc)
+	{
+		name = cardDesc.name;
+		collection = cardDesc.collection;
+	}
+	public void setCard(CardDescriptor cardDesc, PokemonDescriptor pokeDesc)
+	{
+		name = cardDesc.name;
+		collection = cardDesc.collection;
+	}
+	public void setCard(CardDescriptor cardDesc, TrainerDescriptor trDesc)
+	{
+		name = cardDesc.name;
+		collection = cardDesc.collection;
+	}
+	public void setCard(CardDescriptor cardDesc, PokemonType pokemonType)
+	{
+		name = cardDesc.name;
+		collection = cardDesc.collection;
 	}
 	
 	public void display()
@@ -39,6 +68,6 @@ public class Card implements Serializable {
 	
 	public String toString()
 	{
-		return "Name : "+name+"\nCardType : "+cardType+"\nCollection : "+collection;
+		return "Name : "+name+"\nCardType : "+cardType+"\nCollection : "+collection+"\n";
 	}
 }
