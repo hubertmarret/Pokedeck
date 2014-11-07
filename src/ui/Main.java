@@ -1,12 +1,9 @@
 package ui;
 
-import cardHandler.Game;
-
 public class Main {
 
 	public static void main(String[] args) {
-		Game game = new Game();
-		game.infinteLoop();
+		GraphicUserInterface gui = new GraphicUserInterface();
 	}
 
 }
