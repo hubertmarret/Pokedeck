@@ -1,10 +1,14 @@
 package ui;
 
+import cardHandler.Game;
+
 public class Main {
 
 	public static void main(String[] args) {
-		@SuppressWarnings("unused")
-		GraphicUserInterface gui = new GraphicUserInterface();
+		Game g = new Game();
+		g.infinteLoop();
+		
+		//GraphicUserInterface gui = new GraphicUserInterface();
 	}
 
 }
